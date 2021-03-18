@@ -16,9 +16,9 @@
         <input type="number" id="numero_chamada" placeholder="12">
         <label for="name">Nome</label>
         <input type="text" id="name" placeholder="Gabriel">
-        <label for="number">Nota A1</label>
+        <label for="a1">Nota A1</label>
         <input type="number" id="a1" placeholder="10">
-        <label for="number">Nota A2</label>
+        <label for="a2">Nota A2</label>
         <input type="number" id="a2" placeholder="10">
         <label for="faltas">Faltas</label>
         <input type="number" id="faltas" placeholder="2">
@@ -31,8 +31,9 @@
     </section>
     
     <section id="table">
- 
+      <label for="">Tipo de ordenacao</label>
         <select onclick="chamarFuncao(event)">
+          
           <option value="">Padrão</option>
           <option value="ordenarPorMedia">Media</option>
           <option value="ordernarPorFalta">Falta</option>
