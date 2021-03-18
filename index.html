@@ -9,7 +9,7 @@
 </head>
 <body>
   <main>
-    <section>
+    <section id="form">
       <form action="" id="formulario">
         <h1>Preencha as informações</h1>
         <label for="numero_chamada">Número da chamada</label>
@@ -30,16 +30,17 @@
       </form>
     </section>
     
+    
     <section id="table">
-      <label for="">Tipo de ordenacao</label>
-        <select onclick="chamarFuncao(event)">
-          
-          <option value="">Padrão</option>
-          <option value="ordenarPorMedia">Media</option>
-          <option value="ordernarPorFalta">Falta</option>
-        </select>
-
-     
+      <section id="escolherFuncao">
+        <label for="">Tipo de ordenacao</label>
+          <select onchange="chamarFuncao(event)">
+            <option value="">Padrão</option>
+            <option value="ordenarPorMedia">Media</option>
+            <option value="ordernarPorFalta">Falta</option>
+          </select>
+  
+      </section>
       <table>
         <thead>
           <tr>
@@ -54,11 +55,14 @@
         </thead>
         <tbody>
         </tbody>
-        
       </table>
     </section>
     
   </main>
+
+  <footer>
+    @gabriel
+  </footer>
   
 
   <script src="script.js"></script>
