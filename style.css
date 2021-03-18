@@ -58,6 +58,10 @@ input {
   border: none;
   border-radius: 5px;
 }
+input:focus{
+  box-shadow: 1px 1px 20px 0 var(--color-cornflower);
+  outline: 0;
+}
 
 .button {
   padding-top: 50px;
