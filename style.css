@@ -1,3 +1,10 @@
+:root {
+  --color-cornflower: #546de5;
+  --color-pencilLead: #596275;
+  --color-biscay: #303952;
+  --color-softBlue: #778beb;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +17,7 @@ html, body {
 }
 body {
   color: white;
-  background-color: #596275;
+  background-color: var(--color-pencilLead);
 }
 section#form {
   height: 100%;
@@ -38,7 +45,7 @@ form {
   align-items: center;
   padding: 60px;
   border-radius: 10px;
-  background-color: #303952;
+  background-color: var(--color-biscay);
 }
 label {
   display: block;
@@ -64,7 +71,7 @@ button{
   display: block;
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: #546de5;
+  background-color:  var(--color-cornflower);
   border: none;
   width: 100%;
   border-radius: 10px;
@@ -74,7 +81,7 @@ button{
 }
 
 button:hover{
-  background-color: #778beb;
+  background-color: var(--color-softBlue);
 }
 
 /*Parte da tabela*/
@@ -88,7 +95,7 @@ section#table {
   width: 80%;
   margin: 0 auto;
   overflow-x: auto;
-  box-shadow: 2px 2px 100px 1px #546de5;
+  box-shadow: 2px 2px 100px 1px var(--color-cornflower);
   border-radius: 10px;
   padding: 50px 30px;
 }
@@ -96,7 +103,7 @@ section#table {
 table {
   margin-left: 0;
   padding: 0;
-  background-color: #546de5;
+  background-color:  var(--color-cornflower);
   border-radius: 5px;
   width: 100%; 
 }
@@ -128,7 +135,7 @@ footer img {
     width: 100%;
     margin: 0 auto;
     overflow-x: auto;
-    box-shadow: 2px 2px 100px 1px #546de5;
+    box-shadow: 2px 2px 100px 1px var(--color-cornflower);
     border-radius: 10px;
     padding: 20px 0px;
   }
