@@ -16,12 +16,22 @@ section {
   height: 100%;
   padding: 20px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
+select {
+  width: 100px;
+  margin: 30px 0;
+  padding: 10px;
+  flex-wrap: wrap;
+  flex: 1;
+  border: none;
+  border-radius: 5px;
+}
 form {
-  width: 500px;
+  
   text-align: center;
   justify-content: center;
   align-items: center;
@@ -40,7 +50,18 @@ input {
   border: none;
   border-radius: 5px;
 }
+section#table {
+  margin: 0 auto;
+  width: 100%;
+  padding: 20px;
+  display: grid;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
 table {
+  flex: 1;
   background-color: #574b90;
   border-radius: 5px;
 }

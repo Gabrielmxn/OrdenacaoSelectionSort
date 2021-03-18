@@ -3,6 +3,8 @@ var alunos = [[]]
 var tamanho;
 const VARIAVEL_POS_MEDIA = 4
 const VARIAVEL_POS_FALTA = 5;
+const VARIAVEL_POS_NUMERO_CHAMADA = 0;
+
 function verificarFila(){
   const table = document.querySelector("table tbody");
   table.innerHTML = "";
@@ -39,11 +41,26 @@ function verificarFila(){
   })
 }
 
-/*function ordenarMedia(){
-  console.log(tamanho)
+function ordenarNumeroChamada(){
   for(i = 1; i <= tamanho; i++){
     menor = i;
     for(j = i + 1; j <= tamanho; j++){
+      if(alunos[j][VARIAVEL_POS_NUMERO_CHAMADA] < alunos[menor][VARIAVEL_POS_NUMERO_CHAMADA]){
+        menor = j;
+      }
+    }
+    aux = alunos[i]
+    alunos[i] = alunos[menor]
+    alunos[menor] = aux;
+  }
+  verificarFila();
+}
+
+function ordenarMedia(){
+  console.log(tamanho)
+  for(i = tamanho; i >= 1 ; i--){
+    menor = i;
+    for(j = i - 1 ; j >= 1; j--){
       if(alunos[j][VARIAVEL_POS_MEDIA] < alunos[menor][VARIAVEL_POS_MEDIA]){
         menor = j;
       }
@@ -53,7 +70,7 @@ function verificarFila(){
     alunos[menor] = aux;
   }
   verificarFila();
-}*/
+}
 
 function ordenarFaltas(){
   console.log(tamanho)
@@ -97,7 +114,7 @@ function cadastrarAluno(form){
   alunos[tamanho].push(media, valoresForm[4], valoresForm[5]);
   console.log(alunos);
   limparFormulario(form);
-  ordenarFaltas();
+  ordenarNumeroChamada();
 }
 
 
@@ -121,5 +138,12 @@ document.querySelector("#button").addEventListener("click", () => {
 
 
 
-
-
+function chamarFuncao(event){
+  if(event.target.value == "ordenarPorMedia") {
+    ordenarMedia()
+   }else if(event.target.value == "ordernarPorFalta"){
+    ordenarFaltas()
+   }else {
+    ordenarNumeroChamada();
+   }
+}
