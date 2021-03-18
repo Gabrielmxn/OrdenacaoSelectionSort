@@ -5,42 +5,39 @@ const VARIAVEL_POS_MEDIA = 4
 const VARIAVEL_POS_FALTA = 5;
 const VARIAVEL_POS_NUMERO_CHAMADA = 0;
 
+//Colocar os valores dentro do array na tabela.
 function verificarFila(){
   const table = document.querySelector("table tbody");
   table.innerHTML = "";
   alunos.forEach(aluno => {
     if(aluno[0] != undefined){
-      console.log(aluno)
-    tr = document.createElement("tr");
-    tdNumeroChamada =  document.createElement("td");
-    tdNome =  document.createElement("td");
-    tdA1 =  document.createElement("td");
-    tdA2 =  document.createElement("td");
-    tdMedia =  document.createElement("td");
-    tdFaltas =  document.createElement("td");
-    tdDisciplina =  document.createElement("td");
-    tdNumeroChamada.innerHTML = aluno[0]
-    tr.appendChild(tdNumeroChamada)
-    tdNome.innerHTML = aluno[1]
-    tr.appendChild(tdNome)
-    tdA1.innerHTML = aluno[2]
-    tr.appendChild(tdA1)
-    tdA2.innerHTML = aluno[3]
-    tr.appendChild(tdA2)
-    tdMedia.innerHTML = aluno[4]
-    tr.appendChild(tdMedia)
-    tdFaltas.innerHTML = aluno[5]
-    tr.appendChild(tdFaltas)
-    tdDisciplina.innerHTML = aluno[6]
-    tr.appendChild(tdDisciplina)
-
-    table.appendChild(tr);
+      let tr = document.createElement("tr");
+      let tdNumeroChamada =  document.createElement("td");
+      let tdNome =  document.createElement("td");
+      let tdA1 =  document.createElement("td");
+      let tdA2 =  document.createElement("td");
+      let tdMedia =  document.createElement("td");
+      let tdFaltas =  document.createElement("td");
+      let tdDisciplina =  document.createElement("td");
+      tdNumeroChamada.innerHTML = aluno[0]
+      tr.appendChild(tdNumeroChamada)
+      tdNome.innerHTML = aluno[1]
+      tr.appendChild(tdNome)
+      tdA1.innerHTML = aluno[2]
+      tr.appendChild(tdA1)
+      tdA2.innerHTML = aluno[3]
+      tr.appendChild(tdA2)
+      tdMedia.innerHTML = aluno[4]
+      tr.appendChild(tdMedia)
+      tdFaltas.innerHTML = aluno[5]
+      tr.appendChild(tdFaltas)
+      tdDisciplina.innerHTML = aluno[6]
+      tr.appendChild(tdDisciplina)
+      table.appendChild(tr);
     }
-    
-
   })
 }
-
+//Ordenando pelo número da chamada
 function ordenarNumeroChamada(){
   for(i = 1; i <= tamanho; i++){
     menor = i;
@@ -55,7 +52,7 @@ function ordenarNumeroChamada(){
   }
   verificarFila();
 }
-
+//Ordenando pela media
 function ordenarMedia(){
   console.log(tamanho)
   for(i = tamanho; i >= 1 ; i--){
@@ -71,7 +68,7 @@ function ordenarMedia(){
   }
   verificarFila();
 }
-
+//Ordenando pelas faltas
 function ordenarFaltas(){
   console.log(tamanho)
   for(i = 1; i <= tamanho; i++){
@@ -87,22 +84,18 @@ function ordenarFaltas(){
   }
   verificarFila();
 }
-
-
-
-
+//calculando a média do aluno
 function calcularMedia(nota1, nota2){
   resultado = ( parseInt(nota1) + parseInt(nota2)) / 2
   return resultado;
 }
-
+//limpar o formulário
 function limparFormulario(form){
   form.forEach(arvoreForm => {
     arvoreForm.value = ""
   })
 }
-
-
+//cadastrar o aluno dentro do array alunos.
 function cadastrarAluno(form){
   let valoresForm = []
   form.forEach(value => {
@@ -116,8 +109,7 @@ function cadastrarAluno(form){
   limparFormulario(form);
   ordenarNumeroChamada();
 }
-
-
+//colcoando um evento dentro do botão de clique.
 document.querySelector("#button").addEventListener("click", () => {
   const form = document.querySelectorAll("input")
   let verificarPreenchimento;
@@ -129,15 +121,10 @@ document.querySelector("#button").addEventListener("click", () => {
       verificarPreenchimento = false;
       break;
      }
-   }
-   
+   } 
    verificarPreenchimento ?  cadastrarAluno(form) : alert("Preencha tudo!");
 })
-
-
-
-
-
+//Escolher qual modo que tem que ordenar 
 function chamarFuncao(event){
   if(event.target.value == "ordenarPorMedia") {
     ordenarMedia()
