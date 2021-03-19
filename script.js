@@ -84,7 +84,22 @@ function ordenarFaltas(){
 }
 //calculando a média do aluno
 function calcularMedia(nota1, nota2){
-  resultado = ( parseInt(nota1) + parseInt(nota2)) / 2
+  resultado = (parseFloat(nota1) + parseFloat(nota2)) / 2
+  let arrendodamento = Math.round(resultado, -1)
+  if(resultado > arrendodamento){
+    if(resultado <= arrendodamento + 0.2){
+      resultado = arrendodamento;
+    }else {
+      resultado = arrendodamento + 0.5;
+    }
+  }
+  else {
+    if(resultado >= arrendodamento - 0.2){
+      resultado = arrendodamento;
+    }else {
+      resultado = arrendodamento - 0.5;
+    }
+  }
   return resultado;
 }
 //limpar o formulário
@@ -101,6 +116,7 @@ function cadastrarAluno(form){
   })
   tamanho = alunos.length;
   alunos.push([valoresForm[0], valoresForm[1], valoresForm[2], valoresForm[3]])
+  console.log(alunos[tamanho][2], alunos[tamanho][3])
   let media = calcularMedia(alunos[tamanho][2], alunos[tamanho][3]);
   alunos[tamanho].push(media, valoresForm[4], valoresForm[5]);
   limparFormulario(form);
@@ -155,3 +171,7 @@ function chamarFuncao(){
     ordenarNumeroChamada();
    }
 }
+
+
+
+
