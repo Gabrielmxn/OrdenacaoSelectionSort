@@ -39,6 +39,7 @@ select {
   flex: 1;
   border: none;
   border-radius: 5px;
+  outline: 0;
 }
 form {
   width: 600px;
