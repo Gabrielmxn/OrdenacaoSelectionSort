@@ -54,7 +54,6 @@ function ordenarNumeroChamada(){
 }
 //Ordenando pela media
 function ordenarMedia(){
-  console.log(tamanho)
   for(i = tamanho; i >= 1 ; i--){
     menor = i;
     for(j = i - 1 ; j >= 1; j--){
@@ -107,7 +106,7 @@ function cadastrarAluno(form){
   alunos[tamanho].push(media, valoresForm[4], valoresForm[5]);
   console.log(alunos);
   limparFormulario(form);
-  ordenarNumeroChamada();
+  chamarFuncao();
 }
 //colcoando um evento dentro do botão de clique.
 document.querySelector("#button").addEventListener("click", () => {
@@ -125,10 +124,11 @@ document.querySelector("#button").addEventListener("click", () => {
    verificarPreenchimento ?  cadastrarAluno(form) : alert("Preencha tudo!");
 })
 //Escolher qual modo que tem que ordenar 
-function chamarFuncao(event){
-  if(event.target.value == "ordenarPorMedia") {
+function chamarFuncao(){
+  const select = document.querySelector("#opcao")
+  if(select.value == "ordenarPorMedia") {
     ordenarMedia()
-   }else if(event.target.value == "ordernarPorFalta"){
+   }else if(select.value == "ordernarPorFalta"){
     ordenarFaltas()
    }else {
     ordenarNumeroChamada();
