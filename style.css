@@ -49,7 +49,7 @@ form {
   text-align:left;
   justify-content: center;
   align-items: center;
-  padding: 60px;
+  padding: 20px 60px;
   border-radius: 10px;
   background-color: var(--color-biscay);
 }
@@ -100,7 +100,12 @@ button{
 button:hover{
   background-color: var(--color-softBlue);
 }
-
+.aviso{
+  padding: 30px;
+  text-align: center;
+  color: red;
+  font-weight: bold;
+}
 /*Parte da tabela*/
 section#escolherFuncao {
   display: block;

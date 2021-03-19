@@ -126,11 +126,13 @@ function cadastrarAluno(form){
 function verificarPreenchimentoDeNotas(event){
   let notas = event.target.value;
   let verificador;
+  let p = document.querySelector('.aviso');
   if(notas >= 0 && notas <= 10){
     verificador = true;
+    p.innerHTML = "";
   }else{
     event.target.value = "";
-   alert("Preencha um valor entre 0 e 10")
+    p.innerHTML = "Digite um valor em notas entre 0 a 10";
   }
   return verificador;
 }
