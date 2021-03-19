@@ -21,7 +21,7 @@ function verificarFila(){
       let tdDisciplina =  document.createElement("td");
       tdNumeroChamada.innerHTML = aluno[0]
       tr.appendChild(tdNumeroChamada)
-      tdNome.innerHTML = aluno[1]
+      tdNome.innerHTML = aluno[1].toUpperCase()
       tr.appendChild(tdNome)
       tdA1.innerHTML = aluno[2]
       tr.appendChild(tdA1)
@@ -31,13 +31,13 @@ function verificarFila(){
       tr.appendChild(tdMedia)
       tdFaltas.innerHTML = aluno[5]
       tr.appendChild(tdFaltas)
-      tdDisciplina.innerHTML = aluno[6]
+      tdDisciplina.innerHTML = aluno[6].toUpperCase();
       tr.appendChild(tdDisciplina)
       table.appendChild(tr);
     }
   })
 }
-//Ordenando pelo número da chamada
+//Ordenando pelo número da chamada em ordem crescente.
 function ordenarNumeroChamada(){
   for(i = 1; i <= tamanho; i++){
     menor = i;
@@ -52,7 +52,7 @@ function ordenarNumeroChamada(){
   }
   verificarFila();
 }
-//Ordenando pela media
+//Ordenando pelas medias classificadas em ordem decrescente
 function ordenarMedia(){
   for(i = tamanho; i >= 1 ; i--){
     menor = i;
@@ -67,9 +67,8 @@ function ordenarMedia(){
   }
   verificarFila();
 }
-//Ordenando pelas faltas
+//Ordenando pelas faltas em ordem crescente
 function ordenarFaltas(){
-  console.log(tamanho)
   for(i = 1; i <= tamanho; i++){
     menor = i;
     for(j = i + 1; j <= tamanho; j++){
@@ -104,24 +103,46 @@ function cadastrarAluno(form){
   alunos.push([valoresForm[0], valoresForm[1], valoresForm[2], valoresForm[3]])
   let media = calcularMedia(alunos[tamanho][2], alunos[tamanho][3]);
   alunos[tamanho].push(media, valoresForm[4], valoresForm[5]);
-  console.log(alunos);
   limparFormulario(form);
   chamarFuncao();
 }
+//verificar todo o preenchimento de notas
+function verificarPreenchimentoDeNotas(event){
+  let notas = event.target.value;
+  let verificador;
+  if(notas >= 0 && notas <= 10){
+    verificador = true;
+  }else{
+    event.target.value = "";
+   alert("Preencha um valor entre 0 e 10")
+  }
+  return verificador;
+}
+//verificar todo o preenchimento do formulário
+function verificarTodoPreenchimento(form){
+  //verificando se o formulário foi todo preenchido.
+  let verificador;
+  for(i = 0; i <= form.length - 1; i++){
+    if(form[i].value != ""){
+      verificador = true;
+    }else {
+      verificador = false;
+      break;
+    }
+  }
+  return verificador;
+}
+//colocando um evento 'input' no input de notas.
+document.querySelectorAll(".nota").forEach(notas => {
+  notas.addEventListener("input", (event) => {
+    verificarPreenchimentoDeNotas(event);
+  })
+})
 //colcoando um evento dentro do botão de clique.
 document.querySelector("#button").addEventListener("click", () => {
   const form = document.querySelectorAll("input")
-  let verificarPreenchimento;
-  //verificando se o formulário foi todo preenchido.
-   for(i = 0; i <= form.length - 1; i++){
-     if(form[i].value != ""){
-      verificarPreenchimento = true;
-     }else {
-      verificarPreenchimento = false;
-      break;
-     }
-   } 
-   verificarPreenchimento ?  cadastrarAluno(form) : alert("Preencha tudo!");
+  let verificarPreenchimento = verificarTodoPreenchimento(form);
+  verificarPreenchimento  ? cadastrarAluno(form) : alert("Preencha tudo")
 })
 //Escolher qual modo que tem que ordenar 
 function chamarFuncao(){
