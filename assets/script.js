@@ -43,13 +43,19 @@ const DOM = {
     })
   }
 }
-
+const temporizador = {
+  tempoOcorrido(inicio, fim){
+    console.log(console.log("Inicio = " + inicio + ' fim ' + fim))
+    console.log(`resultado ${fim - inicio}`)
+  }
+}
 const ordenacao = {
   //tamanho do array
   tamanho: DOM.all.length,
+  fim: '',
   //SELECTION SORT - Ordenar por número da chamada
-  ordenarNumeroChamada(){
-
+  ordenarNumeroChamada(inicio){
+    
     for(i = 0; i < ordenacao.tamanho; i++){
       menor = i;
       for(j = i + 1; j < ordenacao.tamanho; j++){
@@ -62,10 +68,12 @@ const ordenacao = {
       DOM.all[menor] = aux;
       
     }
+    ordenacao.fim = new Date().getTime();
+    temporizador.tempoOcorrido(inicio, ordenacao.fim);
     DOM.verificarFila();
   },
   //SELECTION SORT - Ordenar por media
-  ordenarMedia(){
+  ordenarMedia(inicio){
     for(i = ordenacao.tamanho - 1; i >= 0 ; i--){
       menor = i;
       for(j = i - 1 ; j >= 0; j--){
@@ -77,10 +85,12 @@ const ordenacao = {
       DOM.all[i] = DOM.all[menor]
       DOM.all[menor] = aux;
     }
+    ordenacao.fim = new Date().getTime();
+    temporizador.tempoOcorrido(inicio, ordenacao.fim);
     DOM.verificarFila();
   },
   //SELECTION SORT - Ordenar por faltas
-  ordenarFaltas(){
+  ordenarFaltas(inicio){
     for(i = 0; i < ordenacao.tamanho; i++){
       menor = i;
       for(j = i + 1; j < ordenacao.tamanho; j++){
@@ -92,9 +102,13 @@ const ordenacao = {
       DOM.all[i] = DOM.all[menor]
       DOM.all[menor] = aux;
     }
+    ordenacao.fim = new Date().getTime();
+    temporizador.tempoOcorrido(inicio, ordenacao.fim);
     DOM.verificarFila();
   }
 }
+
+
 const aluno = {
   //calculando a média do aluno
   calcularMedia(nota1, nota2){
@@ -178,12 +192,16 @@ const App = {
 //Escolher qual modo que tem que ordenar 
 function chamarFuncao(){
   const select = document.querySelector("#opcao")
+  let inicio;
   if(select.value == "ordenarPorMedia") {
-    ordenacao.ordenarMedia();
+    inicio = new Date().getTime();
+    ordenacao.ordenarMedia(inicio);
    }else if(select.value == "ordernarPorFalta"){
-    ordenacao.ordenarFaltas();
+    inicio = new Date().getTime();
+    ordenacao.ordenarFaltas(inicio);
    }else {
-    ordenacao.ordenarNumeroChamada();
+    inicio = new Date().getTime();
+    ordenacao.ordenarNumeroChamada(inicio);
    }
 }
 //colocando um evento 'input' no input de notas.

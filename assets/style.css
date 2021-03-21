@@ -41,8 +41,13 @@ select {
   border-radius: 5px;
   outline: 0;
 }
+
 .titulo {
   text-align: center;
+}
+.titulo img{
+  width: 50px;
+  margin: 10px;
 }
 form {
   width: 600px;
