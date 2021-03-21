@@ -2,23 +2,25 @@ let i, j, aux, menor;
 var alunos = []
 
 const Storage ={
+  //recuperando os valores do localStorage
   get(){
     return JSON.parse(localStorage.getItem('section.sort:cadastro')) || [];
   },
+  //setando os valores para o localStorage
   set(cadastro){
     localStorage.setItem("section.sort:cadastro", JSON.stringify(cadastro));
   }
 }
 
 const DOM = {
-  //Colocar os valores dentro do array na tabela.
+  //recuperando os valores do localstorege
   all: Storage.get(),
+  //Colocar os valores dentro do array na tabela.
   verificarFila(){
     const table = document.querySelector("table tbody");
     table.innerHTML = "";
     if(DOM.all != []){
       DOM.all.forEach(aluno => {
-        console.log(aluno);
         let tr = document.createElement("tr");
         const html = `
         <td>${aluno.numero_chamada}</td>
@@ -29,25 +31,25 @@ const DOM = {
         <td>${aluno.faltas}</td>
         <td>${aluno.disciplina}</td>`
         tr.innerHTML = html;
-        table.appendChild(tr);
-      
-    })
-    }
-    
+        table.appendChild(tr); 
+      })
+    }  
   },
   //limpar o formulário
-  limparFormulario(form){
-    form.forEach(arvoreForm => {
-      arvoreForm.value = ""
+  limparFormulario(){
+    const formLimpar = document.querySelectorAll('input');
+    formLimpar.forEach(formulario => {
+      formulario.value = "";
     })
   }
 }
 
 const ordenacao = {
+  //tamanho do array
   tamanho: DOM.all.length,
+  //SELECTION SORT - Ordenar por número da chamada
   ordenarNumeroChamada(){
 
-    console.log('tamanho' + ordenacao.tamanho)
     for(i = 0; i < ordenacao.tamanho; i++){
       menor = i;
       for(j = i + 1; j < ordenacao.tamanho; j++){
@@ -55,16 +57,14 @@ const ordenacao = {
           menor = j;
         }
       }
-      console.log("oi")
       aux = DOM.all[i]
       DOM.all[i] = DOM.all[menor]
       DOM.all[menor] = aux;
       
     }
-    console.log("vetor aqui")
-    console.log(DOM.all);
     DOM.verificarFila();
   },
+  //SELECTION SORT - Ordenar por media
   ordenarMedia(){
     for(i = ordenacao.tamanho - 1; i >= 0 ; i--){
       menor = i;
@@ -79,6 +79,7 @@ const ordenacao = {
     }
     DOM.verificarFila();
   },
+  //SELECTION SORT - Ordenar por faltas
   ordenarFaltas(){
     for(i = 0; i < ordenacao.tamanho; i++){
       menor = i;
@@ -117,31 +118,25 @@ const aluno = {
   },
   //cadastrar o aluno dentro do array alunos.
   cadastrarAluno(form){
-    let valoresForm = []
-    form.forEach(value => {
-      valoresForm.push(value.value)  
-    })
- 
     //alunos.push([valoresForm[0], valoresForm[1]])
-    let media = aluno.calcularMedia(valoresForm[2], valoresForm[3]);
+    let media = aluno.calcularMedia(form.notaA1.value, form.notaA2.value);
     DOM.all.push({
-      numero_chamada: valoresForm[0],
-      nome: valoresForm[1],
-      notaA1: valoresForm[2],
-      notaA2: valoresForm[3],
-      media:  media,
-      faltas: valoresForm[4],
-      disciplina: valoresForm[5]
+      numero_chamada: form.numero_chamada.value,
+      nome: form.name.value,
+      notaA1: parseFloat(form.notaA1.value),
+      notaA2: parseFloat(form.notaA2.value),
+      media,
+      faltas: parseInt(form.faltas.value) ,
+      disciplina: form.disciplina.value
     })
 
     Storage.set(
       DOM.all
     )
     ordenacao.tamanho = DOM.all.length;
-    DOM.limparFormulario(form);
+    DOM.limparFormulario();
     chamarFuncao();
   }
-
 } 
 const verificarFormulario = {
   //verificar todo o preenchimento de notas
@@ -161,8 +156,8 @@ const verificarFormulario = {
   verificarTodoPreenchimento(form){
     //verificando se o formulário foi todo preenchido.
     let verificador;
-    for(i = 0; i <= form.length - 1; i++){
-      if(form[i].value != ""){
+    for(i = 0; i <= form[0].length - 2; i++){
+      if(form[0][i].value != ""){
         verificador = true;
       }else {
         verificador = false;
@@ -174,6 +169,7 @@ const verificarFormulario = {
 }
 
 const App = {
+  //iniciar o app;
   init(){
     chamarFuncao(); 
   },
@@ -182,7 +178,6 @@ const App = {
 //Escolher qual modo que tem que ordenar 
 function chamarFuncao(){
   const select = document.querySelector("#opcao")
-  
   if(select.value == "ordenarPorMedia") {
     ordenacao.ordenarMedia();
    }else if(select.value == "ordernarPorFalta"){
@@ -198,10 +193,12 @@ document.querySelectorAll(".nota").forEach(notas => {
   })
 })
 //colcoando um evento dentro do botão de clique.
-document.querySelector("#button").addEventListener("click", () => {
-  const form = document.querySelectorAll("input")
-  let verificarPreenchimento = verificarFormulario.verificarTodoPreenchimento(form);
-  verificarPreenchimento  ? aluno.cadastrarAluno(form) : alert("Preencha tudo")
+document.querySelector("#formulario").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formul =  document.forms;
+  const { numero_chamada, name, notaA1, notaA2, faltas, disciplina } = formul.formulario;
+  let verificarPreenchimento = verificarFormulario.verificarTodoPreenchimento(formul);
+  verificarPreenchimento  ? aluno.cadastrarAluno({ numero_chamada, name, notaA1, notaA2, faltas, disciplina }) : alert("Preencha tudo")
 })
 
 
