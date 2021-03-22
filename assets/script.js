@@ -1,6 +1,15 @@
 let i, j, aux, menor;
 var alunos = []
 
+const modal = {
+  noModal: document.querySelector("#modal"),
+  open(){
+    modal.noModal.classList.add("open");
+  },
+  close(){
+    modal.noModal.classList.remove("open");
+  }
+}
 const Storage ={
   //recuperando os valores do localStorage
   get(){
@@ -16,10 +25,14 @@ const DOM = {
   //recuperando os valores do localstorege
   all: Storage.get(),
   //Colocar os valores dentro do array na tabela.
+  colocarTable(){
+    const table = document.querySelector("#table")
+    table.classList.add("visivel");
+  },
   verificarFila(){
     const table = document.querySelector("table tbody");
     table.innerHTML = "";
-    if(DOM.all != []){
+    if(DOM.all.length != 0){
       DOM.all.forEach(aluno => {
         let tr = document.createElement("tr");
         const html = `
@@ -33,7 +46,11 @@ const DOM = {
         tr.innerHTML = html;
         table.appendChild(tr); 
       })
-    }  
+      
+      DOM.colocarTable();
+      
+    }
+     
   },
   //limpar o formulário
   limparFormulario(){
@@ -135,7 +152,7 @@ const aluno = {
     //alunos.push([valoresForm[0], valoresForm[1]])
     let media = aluno.calcularMedia(form.notaA1.value, form.notaA2.value);
     DOM.all.push({
-      numero_chamada: form.numero_chamada.value,
+      numero_chamada: parseInt(form.numero_chamada.value),
       nome: form.name.value,
       notaA1: parseFloat(form.notaA1.value),
       notaA2: parseFloat(form.notaA2.value),
@@ -147,6 +164,8 @@ const aluno = {
     Storage.set(
       DOM.all
     )
+    modal.open();
+    setInterval(() => { modal.close() }, 1200);
     ordenacao.tamanho = DOM.all.length;
     DOM.limparFormulario();
     chamarFuncao();

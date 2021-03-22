@@ -11,24 +11,23 @@
   padding: 0;
   box-sizing: border-box;
 }
-html, body {
-  width: 100%;
-  height: 100%
- 
-}
+
 body {
+  position: relative;
+  height: 100vh;
   font-family: 'Roboto', sans-serif;
   color: white;
   background-color: var(--color-pencilLead);
 }
 section#form {
-  height: 100%;
-  padding: 20px;
+  
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   text-align: center;
+  height: 100%;
+  padding: 20px;
   margin-bottom: 50px;
 }
 select {
@@ -70,7 +69,7 @@ input {
   border-radius: 5px;
 }
 input:focus{
-  box-shadow: 1px 1px 20px 0 var(--color-cornflower);
+  box-shadow: 1px 1px 10px 0 var(--color-cornflower);
   outline: 0;
 }
 
@@ -126,20 +125,33 @@ section#escolherFuncao {
   padding: 20px;
 }
 section#table {
-
   display: block;
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+  background-color: var(--color-biscay);
+  padding: 20px 30px 50px 30px;
+  border-radius: 10px;
+  transform: scaley(0);
+  transition: transform 0.3s;
+}
+section#table.visivel {
+  height: 100%; 
   width: 80%;
   margin: 0 auto;
+  opacity: 1;
+  visibility: visible;
+  transform: scaley(1);
   overflow-x: auto;
-  box-shadow: 2px 2px 100px 1px var(--color-cornflower);
-  border-radius: 10px;
-  padding: 50px 30px;
-}
 
+ 
+}
+/* TABLE */
 table {
   margin-left: 0;
   padding: 0;
   background-color:  var(--color-cornflower);
+  opacity: 0.9;
   border-radius: 5px;
   width: 100%; 
 }
@@ -148,8 +160,34 @@ td, th {
   padding: 10px;
 }
 
-
-
+/* MODAL */ 
+#modal {
+  position: fixed;
+  display: flex;
+  height: 80px;
+  width: 300px;
+  top: 0;
+  right: 0;
+  text-align: right;
+  align-items:center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: white;
+  margin: 5px 5px 0 0;
+  padding: 25px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s;
+}
+#modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+#modal p {
+  color: green;
+  font-size: 1rem;
+}
+/* FOOTER */
 footer {
   padding-top: 30px;
   display: flex;
@@ -163,15 +201,22 @@ footer {
 footer img {
   width: 50px;
 }
-
+/* MOBILE */
 @media screen and (max-width: 800px){
-  section#table {
+  section#table.visivel {
     display: block;
     width: 100%;
-    margin: 0 auto;
     overflow-x: auto;
-    box-shadow: 2px 2px 100px 1px var(--color-cornflower);
     border-radius: 10px;
     padding: 20px 0px;
+  }
+
+  #modal {
+    height: 80px;
+    width: 230px;
+  }
+
+  #modal p {
+    font-size: 0.7rem;
   }
 }
