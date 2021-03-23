@@ -4,6 +4,7 @@
   --color-pencilLead: #596275;
   --color-biscay: #303952;
   --color-softBlue: #778beb;
+  --color-background: #49577c;
 }
 
 * {
@@ -17,7 +18,8 @@ body {
   height: 100vh;
   font-family: 'Roboto', sans-serif;
   color: white;
-  background-color: var(--color-pencilLead);
+  background-color: var(--color-background);
+ 
 }
 section#form {
   display: flex;
