@@ -11,7 +11,7 @@ O projeto foi criado para auxiliar no ensinanamento do selection sort.
 $ git clone https://github.com/Gabrielmxn/ordenacaSelectionSort.git
 
 # Acesse a pasta do projeto no terminal/cmd
-$ cd ordenacaSelectionSort
+$ cd OrdenacaoSelectionSort
 
 # Entra no visual code
 $ code .
